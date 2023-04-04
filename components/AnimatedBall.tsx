@@ -1,8 +1,8 @@
 import {StyleSheet, View, Animated, Pressable} from 'react-native';
-import React, {useState} from 'react';
+import React, {useRef} from 'react';
 
 export const AnimatedBall = () => {
-  const value = useState(new Animated.ValueXY({x: 0, y: 0}))[0];
+  const value = useRef(new Animated.ValueXY({x: 0, y: 0})).current;
   const moveBall = () => {
     Animated.timing(value, {
       toValue: {x: 100, y: 100},
@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     borderRadius: 100 / 2,
   },
   btn: {
-    width: 50,
+    width: 100,
     backgroundColor: 'green',
-    height: 100,
+    height: 20,
   },
 });
