@@ -1,12 +1,16 @@
-import {StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import React from 'react';
-import {AnimatedBall} from './components';
+// import {AnimatedBall} from './components';
+import Duolingo from './pages/Duolingo';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <AnimatedBall />
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <Duolingo />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
