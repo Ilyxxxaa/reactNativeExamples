@@ -1,3 +1,3 @@
-import {AnimatedBall} from './AnimatedBall';
+import {AnimatedBall} from './AnimatedBall/AnimatedBall';
 
 export {AnimatedBall};
