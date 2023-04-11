@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   title: {
-    fontFamily: 'Nunito-Bold',
     fontSize: 24,
     paddingLeft: 16,
     marginBottom: 16,

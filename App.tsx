@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import React from 'react';
 // import {AnimatedBall} from './components';

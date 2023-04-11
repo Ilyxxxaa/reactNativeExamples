@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   text: {
-    fontFamily: 'Nunito-Regular',
     fontSize: 19,
   },
   shadow: {
