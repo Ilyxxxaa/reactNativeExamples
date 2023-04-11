@@ -1,7 +1,7 @@
 import {SafeAreaView, StyleSheet} from 'react-native';
 import React from 'react';
 // import {AnimatedBall} from './components';
-import Duolingo from './pages/Duolingo';
+import {Duolingo} from './pages';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
