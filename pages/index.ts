@@ -1,3 +1,4 @@
 import Duolingo from './Duolingo/Duolingo';
+import {UseTransition} from './TransitionCards';
 
-export {Duolingo};
+export {Duolingo, UseTransition};
