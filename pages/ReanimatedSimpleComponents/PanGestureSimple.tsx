@@ -4,6 +4,7 @@ import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
 } from 'react-native-reanimated';
 
 import {
@@ -12,6 +13,7 @@ import {
 } from 'react-native-gesture-handler';
 
 const SIZE = 100.0;
+const RADIUS = 180;
 
 type ContextInterface = {
   translateX: number;
@@ -34,7 +36,14 @@ export const PanGestureSimple = () => {
       translateX.value = event.translationX + context.translateX;
       translateY.value = event.translationY + context.translateY;
     },
-    onEnd: event => {},
+    onEnd: () => {
+      const distance = Math.sqrt(translateX.value ** 2 + translateY.value ** 2);
+
+      if (distance < RADIUS + SIZE / 2) {
+        translateX.value = withSpring(0);
+        translateY.value = withSpring(0);
+      }
+    },
   });
 
   const rStyle = useAnimatedStyle(() => {
@@ -52,9 +61,11 @@ export const PanGestureSimple = () => {
 
   return (
     <View style={styles.container}>
-      <PanGestureHandler onGestureEvent={panGestureEvent}>
-        <Animated.View style={[styles.square, rStyle]} />
-      </PanGestureHandler>
+      <View style={styles.circle}>
+        <PanGestureHandler onGestureEvent={panGestureEvent}>
+          <Animated.View style={[styles.square, rStyle]} />
+        </PanGestureHandler>
+      </View>
     </View>
   );
 };
@@ -70,5 +81,14 @@ const styles = StyleSheet.create({
     height: SIZE,
     backgroundColor: 'rgba(0,0,256, 0.5)',
     borderRadius: 20,
+  },
+  circle: {
+    width: RADIUS * 2,
+    height: RADIUS * 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: RADIUS,
+    borderWidth: 5,
+    borderColor: 'rgba(0,0,256, 0.5)',
   },
 });
