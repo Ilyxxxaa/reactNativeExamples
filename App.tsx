@@ -1,15 +1,18 @@
 import 'react-native-gesture-handler';
 import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import React from 'react';
 // import {AnimatedBall} from './components';
-import {Duolingo, UseTransition} from './pages';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+// import {Duolingo} from './pages';
+// import { UseTransition } from './pages';
+// import {OpacityRect} from './pages';
+import {PanGestureSimple} from './pages';
 
 const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <UseTransition />
+        <PanGestureSimple />
       </SafeAreaView>
     </SafeAreaProvider>
   );
