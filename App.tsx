@@ -7,14 +7,15 @@ import React from 'react';
 // import { UseTransition } from './pages';
 // import {OpacityRect} from './pages';
 // import {PanGestureSimple} from './pages';
-import {Slider} from './pages';
+// import {Slider} from './pages';
+import {Duolingo} from './pages';
 
 const App = () => {
   return (
     <SafeAreaProvider>
-      {/* <SafeAreaView style={styles.container}> */}
-      <Slider />
-      {/* </SafeAreaView> */}
+      <SafeAreaView style={styles.container}>
+        <Duolingo />
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 };
