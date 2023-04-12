@@ -6,14 +6,15 @@ import React from 'react';
 // import {Duolingo} from './pages';
 // import { UseTransition } from './pages';
 // import {OpacityRect} from './pages';
-import {PanGestureSimple} from './pages';
+// import {PanGestureSimple} from './pages';
+import {Slider} from './pages';
 
 const App = () => {
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <PanGestureSimple />
-      </SafeAreaView>
+      {/* <SafeAreaView style={styles.container}> */}
+      <Slider />
+      {/* </SafeAreaView> */}
     </SafeAreaProvider>
   );
 };

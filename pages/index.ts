@@ -1,6 +1,9 @@
 import Duolingo from './Duolingo/Duolingo';
 import {UseTransition} from './TransitionCards';
-import {OpacityRect} from './ReanimatedSimpleComponents';
-import {PanGestureSimple} from './ReanimatedSimpleComponents';
+import {
+  PanGestureSimple,
+  Slider,
+  OpacityRect,
+} from './ReanimatedSimpleComponents';
 
-export {Duolingo, UseTransition, OpacityRect, PanGestureSimple};
+export {Duolingo, UseTransition, OpacityRect, PanGestureSimple, Slider};
