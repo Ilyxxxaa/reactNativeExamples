@@ -36,6 +36,7 @@ const WordList = ({children}: WordListProps) => {
     originalX: useSharedValue(0),
     originalY: useSharedValue(0),
   }));
+  console.log(offsets[0]);
   if (!ready) {
     return (
       <View style={styles.row}>

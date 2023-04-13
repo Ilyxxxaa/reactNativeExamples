@@ -13,9 +13,14 @@ export type Offset = SharedValues<{
   originalY: number;
 }>;
 
+export const lastOrder = (input: Offset[]) => {
+  'worklet';
+  return input.filter(offset => offset.order.value === 1).length;
+};
+
 const isNotInBank = (offset: Offset) => {
   'worklet';
-  return offset.order.value === -1;
+  return offset.order.value !== -1;
 };
 
 const byOrder = (a: Offset, b: Offset) => {
@@ -28,6 +33,15 @@ export const reorder = (input: Offset[], from: number, to: number) => {
   const offsets = input.filter(isNotInBank).sort(byOrder);
   const newOffset = move(offsets, from, to);
   newOffset.map((offset, index) => (offset.order.value = index));
+};
+
+export const remove = (input: Offset[], index: number) => {
+  'worklet';
+  const offsets = input
+    .filter((_, i) => i !== index)
+    .filter(isNotInBank)
+    .sort(byOrder);
+  offsets.map((offset, i) => (offset.order.value = i));
 };
 
 export const calculateLayout = (input: Offset[], containerWidth: number) => {
