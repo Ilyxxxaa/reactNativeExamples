@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import PhotoCard from './PhotoCard';
 import {responsiveHeight, responsiveWidth} from '../../utils/normalize';
+import {useSharedValue} from 'react-native-reanimated';
 
 const photos = [
   {title: '1', key: 1},
@@ -14,12 +17,33 @@ const photos = [
 
 const HEIGHT = responsiveHeight(344);
 
-export const PhotoSection = () => {
+export const PhotoSection: React.FC = () => {
+  const [photosArray, setPhotos] = useState(photos);
+
+  const offsets = photos.map(() => ({
+    order: useSharedValue(0),
+    width: useSharedValue(0),
+    height: useSharedValue(0),
+    x: useSharedValue(0),
+    y: useSharedValue(0),
+    originalX: useSharedValue(0),
+    originalY: useSharedValue(0),
+  }));
+
   return (
     <View style={styles.container}>
       <View style={styles.photosContainer}>
-        {photos.map((item, index) => {
-          return <PhotoCard title={item.title} index={index} key={item.key} />;
+        {photosArray.map((item, index) => {
+          return (
+            <PhotoCard
+              title={item.title}
+              index={index}
+              key={item.key}
+              offsets={offsets}
+              setPhotos={setPhotos}
+              photosArray={photosArray}
+            />
+          );
         })}
       </View>
     </View>
