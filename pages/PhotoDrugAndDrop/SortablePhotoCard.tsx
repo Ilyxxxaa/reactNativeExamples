@@ -3,12 +3,14 @@ import React, {ReactElement} from 'react';
 import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
 import {GestureEvent, PanGestureHandler} from 'react-native-gesture-handler';
 import {between, useVector} from 'react-native-redash';
-import {Offset} from './utils';
+import {Offset, calculateLayout, reorder} from './utils';
+import {CARD_HEIGHT, CARD_WIDTH, MARGIN, PADDING} from './sizes';
 
 interface IProps {
   children: ReactElement;
@@ -21,6 +23,7 @@ export const SortablePhotoCard: React.FC<IProps> = ({
   index,
   children,
 }) => {
+  const offset = offsets[index];
   const translation = useVector();
   const isGestureActive = useSharedValue(false);
 
@@ -29,6 +32,9 @@ export const SortablePhotoCard: React.FC<IProps> = ({
     {x: number; y: number}
   >({
     onStart: (event, ctx) => {
+      // console.log(event);
+      translation.x.value = offset.x.value;
+      translation.y.value = offset.y.value;
       ctx.x = translation.x.value;
       ctx.y = translation.y.value;
       isGestureActive.value = true;
@@ -36,49 +42,57 @@ export const SortablePhotoCard: React.FC<IProps> = ({
     onActive: (event, ctx) => {
       translation.x.value = ctx.x + (event.translationX as number);
       translation.y.value = ctx.y + (event.translationY as number);
-
       for (let i = 0; i < offsets.length; i++) {
         const o = offsets[i];
-        if (i === index) {
+        if (offset.order.value === offsets[i].order.value) {
+          console.log('равны');
           continue;
         }
         if (
-          between(
-            event.absoluteX as number,
-            o.originalX.value,
-            o.originalX.value + o.width.value,
-          ) &&
-          between(
-            event.absoluteY as number,
-            o.originalY.value,
-            o.originalY.value + o.height.value,
-          )
+          between(translation.x.value, o.x.value, o.x.value + CARD_WIDTH) &&
+          between(translation.y.value, o.y.value, o.y.value + CARD_HEIGHT)
         ) {
-          console.log();
+          console.log(offset.order.value, o.order.value);
+          reorder(offsets, offset.order.value, i);
+          // const item1 = offsets[index];
+          // const item2 = offsets[i];
+          // offsets[index] = item2;
+          // offsets[i] = item1;
+          calculateLayout(offsets);
           break;
         }
       }
     },
     onEnd: () => {
-      translation.x.value = withSpring(0);
-      translation.y.value = withSpring(0);
-      isGestureActive.value = false;
-    },
-
-    onCancel: () => {
-      translation.x.value = withSpring(0);
-      translation.y.value = withSpring(0);
+      translation.x.value = withSpring(offset.x.value);
+      translation.y.value = withSpring(offset.y.value);
       isGestureActive.value = false;
     },
   });
 
+  const translateX = useDerivedValue(() => {
+    if (isGestureActive.value) {
+      return translation.x.value;
+    }
+    return withSpring(offset.x.value);
+  });
+  const translateY = useDerivedValue(() => {
+    if (isGestureActive.value) {
+      return translation.y.value;
+    }
+    return withSpring(offset.y.value);
+  });
+
   const style = useAnimatedStyle(() => {
     return {
-      transform: [
-        {translateX: translation.x.value},
-        {translateY: translation.y.value},
-      ],
+      position: 'absolute',
+      top: 0,
+      left: 0,
       zIndex: isGestureActive.value ? 100 : 0,
+      transform: [
+        {translateX: translateX.value},
+        {translateY: translateY.value},
+      ],
     };
   });
 

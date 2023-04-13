@@ -4,6 +4,7 @@ import React, {ReactElement, useState} from 'react';
 import {runOnJS, runOnUI, useSharedValue} from 'react-native-reanimated';
 import {SortablePhotoCard} from './SortablePhotoCard';
 import {CARDS_GAP, CONTAINER_HEIGHT, MARGIN, PADDING} from './sizes';
+import {calculateLayout} from './utils';
 
 interface IProps {
   children: ReactElement[];
@@ -14,8 +15,6 @@ export const PhotoList: React.FC<IProps> = ({children}) => {
 
   const offsets = children.map(() => ({
     order: useSharedValue(-1),
-    width: useSharedValue(0),
-    height: useSharedValue(0),
     x: useSharedValue(0),
     y: useSharedValue(0),
     originalX: useSharedValue(0),
@@ -31,20 +30,18 @@ export const PhotoList: React.FC<IProps> = ({children}) => {
               key={index}
               onLayout={({
                 nativeEvent: {
-                  layout: {x, y, width, height},
+                  layout: {x, y},
                 },
               }) => {
                 const offset = offsets[index];
                 offset.order.value = index;
-                offset.width.value = width;
-                offset.height.value = height;
                 offset.originalX.value = x;
                 offset.originalY.value = y;
                 runOnUI(() => {
                   'worklet';
                   if (offsets.filter(o => o.order.value === -1).length !== 0) {
-                    // calculateLayout(offsets, containerWidth);
-                    runOnJS(setReady)(false);
+                    calculateLayout(offsets);
+                    runOnJS(setReady)(true);
                   }
                 })();
               }}>
@@ -60,7 +57,7 @@ export const PhotoList: React.FC<IProps> = ({children}) => {
     <View style={styles.container}>
       {children.map((child, index) => {
         return (
-          <SortablePhotoCard index={index} offsets={offsets}>
+          <SortablePhotoCard index={index} offsets={offsets} key={index}>
             {child}
           </SortablePhotoCard>
         );
