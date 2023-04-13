@@ -1,10 +1,7 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-
 import {StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import PhotoCard from './PhotoCard';
-import {responsiveHeight, responsiveWidth} from '../../utils/normalize';
-import {useSharedValue} from 'react-native-reanimated';
+import PhotoList from './PhotoList';
 
 const photos = [
   {title: '1', key: 1},
@@ -15,37 +12,14 @@ const photos = [
   {title: '6', key: 6},
 ];
 
-const HEIGHT = responsiveHeight(344);
-
 export const PhotoSection: React.FC = () => {
-  const [photosArray, setPhotos] = useState(photos);
-
-  const offsets = photos.map(() => ({
-    order: useSharedValue(0),
-    width: useSharedValue(0),
-    height: useSharedValue(0),
-    x: useSharedValue(0),
-    y: useSharedValue(0),
-    originalX: useSharedValue(0),
-    originalY: useSharedValue(0),
-  }));
-
   return (
     <View style={styles.container}>
-      <View style={styles.photosContainer}>
-        {photosArray.map((item, index) => {
-          return (
-            <PhotoCard
-              title={item.title}
-              index={index}
-              key={item.key}
-              offsets={offsets}
-              setPhotos={setPhotos}
-              photosArray={photosArray}
-            />
-          );
+      <PhotoList>
+        {photos.map(item => {
+          return <PhotoCard title={item.title} key={item.key} />;
         })}
-      </View>
+      </PhotoList>
     </View>
   );
 };
@@ -56,17 +30,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'rgba(0,0,256,0.2)',
-  },
-  photosContainer: {
-    paddingVertical: responsiveHeight(12),
-    paddingHorizontal: responsiveWidth(12),
-    marginTop: 20,
-    marginHorizontal: 8,
-    backgroundColor: 'white',
-    height: HEIGHT,
-    borderRadius: 16,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: responsiveWidth(8),
   },
 });
