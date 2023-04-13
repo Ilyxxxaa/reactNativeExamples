@@ -8,13 +8,14 @@ import React from 'react';
 // import {OpacityRect} from './pages';
 // import {PanGestureSimple} from './pages';
 // import {Slider} from './pages';
-import {Duolingo} from './pages';
+// import {PhotoSection} from './pages;
+import {PhotoSection} from './pages';
 
 const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Duolingo />
+        <PhotoSection />
       </SafeAreaView>
     </SafeAreaProvider>
   );
