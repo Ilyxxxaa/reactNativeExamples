@@ -15,7 +15,7 @@ const photos = [
 export const PhotoSection: React.FC = () => {
   return (
     <View style={styles.container}>
-      <PhotoList>
+      <PhotoList drugItemsAmount={3}>
         {photos.map(item => {
           return <PhotoCard title={item.title} key={item.key} />;
         })}

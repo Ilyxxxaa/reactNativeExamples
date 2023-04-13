@@ -16,12 +16,14 @@ interface IProps {
   children: ReactElement;
   index: number;
   offsets: Offset[];
+  drugItemsAmount: number;
 }
 
 export const SortablePhotoCard: React.FC<IProps> = ({
   offsets,
   index,
   children,
+  drugItemsAmount,
 }) => {
   const offset = offsets[index];
   const translation = useVector();
@@ -33,11 +35,13 @@ export const SortablePhotoCard: React.FC<IProps> = ({
   >({
     onStart: (event, ctx) => {
       // console.log(event);
-      translation.x.value = offset.x.value;
-      translation.y.value = offset.y.value;
-      ctx.x = translation.x.value;
-      ctx.y = translation.y.value;
-      isGestureActive.value = true;
+      if (drugItemsAmount > offsets[index].order.value) {
+        translation.x.value = offset.x.value;
+        translation.y.value = offset.y.value;
+        ctx.x = translation.x.value;
+        ctx.y = translation.y.value;
+        isGestureActive.value = true;
+      }
     },
     onActive: (event, ctx) => {
       translation.x.value = ctx.x + (event.translationX as number);
@@ -50,7 +54,8 @@ export const SortablePhotoCard: React.FC<IProps> = ({
         }
         if (
           between(translation.x.value, o.x.value, o.x.value + CARD_WIDTH) &&
-          between(translation.y.value, o.y.value, o.y.value + CARD_HEIGHT)
+          between(translation.y.value, o.y.value, o.y.value + CARD_HEIGHT) &&
+          o.order.value < drugItemsAmount
         ) {
           console.log(offset.order.value, o.order.value);
           reorder(offsets, offset.order.value, i);

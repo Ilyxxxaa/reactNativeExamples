@@ -8,9 +8,10 @@ import {calculateLayout} from './utils';
 
 interface IProps {
   children: ReactElement[];
+  drugItemsAmount: number;
 }
 
-export const PhotoList: React.FC<IProps> = ({children}) => {
+export const PhotoList: React.FC<IProps> = ({children, drugItemsAmount}) => {
   const [ready, setReady] = useState<boolean>(false);
 
   const offsets = children.map(() => ({
@@ -57,7 +58,11 @@ export const PhotoList: React.FC<IProps> = ({children}) => {
     <View style={styles.container}>
       {children.map((child, index) => {
         return (
-          <SortablePhotoCard index={index} offsets={offsets} key={index}>
+          <SortablePhotoCard
+            index={index}
+            offsets={offsets}
+            key={index}
+            drugItemsAmount={drugItemsAmount}>
             {child}
           </SortablePhotoCard>
         );
