@@ -10,13 +10,14 @@ import Animated, {
 import {GestureEvent, PanGestureHandler} from 'react-native-gesture-handler';
 import {between, useVector} from 'react-native-redash';
 import {Offset, calculateLayout, reorder} from './utils';
-import {CARD_HEIGHT, CARD_WIDTH, MARGIN, PADDING} from './sizes';
+import {CARD_HEIGHT, CARD_WIDTH} from './sizes';
 
 interface IProps {
   children: ReactElement;
   index: number;
   offsets: Offset[];
   drugItemsAmount: number;
+  editMode: boolean;
 }
 
 export const SortablePhotoCard: React.FC<IProps> = ({
@@ -24,6 +25,7 @@ export const SortablePhotoCard: React.FC<IProps> = ({
   index,
   children,
   drugItemsAmount,
+  editMode,
 }) => {
   const offset = offsets[index];
   const translation = useVector();
@@ -34,8 +36,8 @@ export const SortablePhotoCard: React.FC<IProps> = ({
     {x: number; y: number}
   >({
     onStart: (event, ctx) => {
-      // console.log(event);
-      if (drugItemsAmount > offsets[index].order.value) {
+      console.log(editMode, 'edit Mode');
+      if (drugItemsAmount > offsets[index].order.value && editMode) {
         translation.x.value = offset.x.value;
         translation.y.value = offset.y.value;
         ctx.x = translation.x.value;
@@ -49,7 +51,6 @@ export const SortablePhotoCard: React.FC<IProps> = ({
       for (let i = 0; i < offsets.length; i++) {
         const o = offsets[i];
         if (offset.order.value === offsets[i].order.value) {
-          console.log('равны');
           continue;
         }
         if (
@@ -57,13 +58,13 @@ export const SortablePhotoCard: React.FC<IProps> = ({
           between(translation.y.value, o.y.value, o.y.value + CARD_HEIGHT) &&
           o.order.value < drugItemsAmount
         ) {
-          console.log(offset.order.value, o.order.value);
           reorder(offsets, offset.order.value, i);
-          // const item1 = offsets[index];
-          // const item2 = offsets[i];
-          // offsets[index] = item2;
-          // offsets[i] = item1;
           calculateLayout(offsets);
+
+          const serverRequest = offsets.map(item => {
+            return item.photoTitle;
+          });
+          console.log(serverRequest);
           break;
         }
       }
@@ -94,9 +95,11 @@ export const SortablePhotoCard: React.FC<IProps> = ({
       top: 0,
       left: 0,
       zIndex: isGestureActive.value ? 100 : 0,
+
       transform: [
         {translateX: translateX.value},
         {translateY: translateY.value},
+        {scale: isGestureActive.value ? 1.1 : 1},
       ],
     };
   });

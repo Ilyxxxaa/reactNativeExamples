@@ -5,21 +5,33 @@ import {runOnJS, runOnUI, useSharedValue} from 'react-native-reanimated';
 import {SortablePhotoCard} from './SortablePhotoCard';
 import {CARDS_GAP, CONTAINER_HEIGHT, MARGIN, PADDING} from './sizes';
 import {calculateLayout} from './utils';
+import {
+  LongPressGestureHandler,
+  LongPressGestureHandlerStateChangeEvent,
+  State,
+} from 'react-native-gesture-handler';
 
 interface IProps {
   children: ReactElement[];
   drugItemsAmount: number;
+  photos: {key: number; title: string}[];
 }
 
-export const PhotoList: React.FC<IProps> = ({children, drugItemsAmount}) => {
+export const PhotoList: React.FC<IProps> = ({
+  children,
+  drugItemsAmount,
+  photos,
+}) => {
   const [ready, setReady] = useState<boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
-  const offsets = children.map(() => ({
+  const offsets = children.map((_, index) => ({
     order: useSharedValue(-1),
     x: useSharedValue(0),
     y: useSharedValue(0),
     originalX: useSharedValue(0),
     originalY: useSharedValue(0),
+    photoTitle: photos[index].title,
   }));
 
   if (!ready) {
@@ -54,20 +66,30 @@ export const PhotoList: React.FC<IProps> = ({children, drugItemsAmount}) => {
     );
   }
 
+  const eventGesture = (event: LongPressGestureHandlerStateChangeEvent) => {
+    if (event.nativeEvent.state === State.ACTIVE) {
+      console.log('включен режим редактирования');
+      setEditMode(true);
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      {children.map((child, index) => {
-        return (
-          <SortablePhotoCard
-            index={index}
-            offsets={offsets}
-            key={index}
-            drugItemsAmount={drugItemsAmount}>
-            {child}
-          </SortablePhotoCard>
-        );
-      })}
-    </View>
+    <LongPressGestureHandler onHandlerStateChange={eventGesture}>
+      <View style={styles.container}>
+        {children.map((child, index) => {
+          return (
+            <SortablePhotoCard
+              index={index}
+              offsets={offsets}
+              key={index}
+              editMode={editMode}
+              drugItemsAmount={drugItemsAmount}>
+              {child}
+            </SortablePhotoCard>
+          );
+        })}
+      </View>
+    </LongPressGestureHandler>
   );
 };
 

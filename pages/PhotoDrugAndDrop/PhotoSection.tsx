@@ -4,18 +4,18 @@ import PhotoCard from './PhotoCard';
 import PhotoList from './PhotoList';
 
 const photos = [
-  {title: '1', key: 1},
-  {title: '2', key: 2},
-  {title: '3', key: 3},
-  {title: '4', key: 4},
-  {title: '5', key: 5},
-  {title: '6', key: 6},
+  {title: 'Первая', key: 1},
+  {title: 'Вторая', key: 2},
+  {title: 'Третья', key: 3},
+  {title: 'Четвертая', key: 4},
+  {title: 'Пятая', key: 5},
+  {title: 'Шестая', key: 6},
 ];
 
 export const PhotoSection: React.FC = () => {
   return (
     <View style={styles.container}>
-      <PhotoList drugItemsAmount={3}>
+      <PhotoList drugItemsAmount={2} photos={photos}>
         {photos.map(item => {
           return <PhotoCard title={item.title} key={item.key} />;
         })}
