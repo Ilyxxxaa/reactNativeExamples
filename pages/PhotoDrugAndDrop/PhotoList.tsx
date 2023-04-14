@@ -31,7 +31,7 @@ export const PhotoList: React.FC<IProps> = ({
     y: useSharedValue(0),
     originalX: useSharedValue(0),
     originalY: useSharedValue(0),
-    photoTitle: photos[index].title,
+    photoTitle: useSharedValue(photos[index].title),
   }));
 
   if (!ready) {

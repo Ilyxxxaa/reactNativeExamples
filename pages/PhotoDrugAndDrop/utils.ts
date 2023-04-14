@@ -14,6 +14,7 @@ export type Offset = SharedValues<{
   y: number;
   originalX: number;
   originalY: number;
+  photoTitle: string;
 }>;
 
 const byOrder = (a: Offset, b: Offset) => {
