@@ -6,6 +6,7 @@ import {
   Slider,
   OpacityRect,
 } from './ReanimatedSimpleComponents';
+import PhotoSection2 from './DrugAndDrop2/PhotoSection2';
 
 export {
   Duolingo,
@@ -14,4 +15,5 @@ export {
   PanGestureSimple,
   Slider,
   PhotoSection,
+  PhotoSection2,
 };

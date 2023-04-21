@@ -9,13 +9,14 @@ import React from 'react';
 // import {PanGestureSimple} from './pages';
 // import {Slider} from './pages';
 // import {PhotoSection} from './pages;
-import {PhotoSection} from './pages';
+// import {PhotoSection} from './pages';
+import {PhotoSection2} from './pages';
 
 const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <PhotoSection />
+        <PhotoSection2 />
       </SafeAreaView>
     </SafeAreaProvider>
   );
