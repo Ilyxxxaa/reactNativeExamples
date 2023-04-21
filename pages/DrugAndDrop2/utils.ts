@@ -1,4 +1,4 @@
-import {move} from 'react-native-redash';
+// import {move} from 'react-native-redash';
 
 import Animated from 'react-native-reanimated';
 import {CARDS_GAP, CARD_HEIGHT, CARD_WIDTH, PADDING} from './sizes';
@@ -22,47 +22,54 @@ const byOrder = (a: Offset, b: Offset) => {
   return a.order.value > b.order.value ? 1 : -1;
 };
 
+export const move = <T>(input: T[], from: number, to: number) => {
+  'worklet';
+  const offsets = input.slice();
+  offsets.splice(to, 0, offsets.splice(from, 1)[0]);
+  return offsets;
+};
+
 export const reorder = (input: Offset[], from: number, to: number) => {
   'worklet';
-  const offsets = input.sort(byOrder);
-  const newOffset = move(offsets, from, to);
+  console.log('меняю местами', from, 'и', to);
+  // const offsets = input.sort(byOrder);
+  const newOffset = move(input, from, to);
   newOffset.map((offset, index) => (offset.order.value = index));
+  console.log('new offsets', input);
+
+  return;
 };
 
 export const calculateLayout = (offsets: Offset[]) => {
   'worklet';
+  // const offsets = input.sort(byOrder);
+
   if (offsets.length === 0) {
     return;
   }
 
   offsets.forEach((offset, index) => {
-    if (index === 0) {
-      // offsets[index].order.value = 0;
+    if (offset.order.value === 0) {
       offsets[index].x.value = PADDING;
       offsets[index].y.value = PADDING;
     }
-    if (index === 1) {
-      // offsets[index].order.value = 1;
+    if (offset.order.value === 1) {
       offsets[index].x.value = PADDING + CARD_WIDTH + CARDS_GAP;
       offsets[index].y.value = PADDING;
     }
-    if (index === 2) {
-      // offsets[index].order.value = 2;
+    if (offset.order.value === 2) {
       offsets[index].x.value = PADDING + CARD_WIDTH * 2 + CARDS_GAP * 2;
       offsets[index].y.value = PADDING;
     }
-    if (index === 3) {
-      // offsets[index].order.value = 3;
+    if (offset.order.value === 3) {
       offsets[index].x.value = PADDING;
       offsets[index].y.value = PADDING + CARDS_GAP + CARD_HEIGHT;
     }
-    if (index === 4) {
-      // offsets[index].order.value = 4;
+    if (offset.order.value === 4) {
       offsets[index].x.value = PADDING + CARD_WIDTH + CARDS_GAP;
       offsets[index].y.value = PADDING + CARDS_GAP + CARD_HEIGHT;
     }
-    if (index === 5) {
-      // offsets[index].order.value = 5;
+    if (offset.order.value === 5) {
       offsets[index].x.value = PADDING + CARD_WIDTH * 2 + CARDS_GAP * 2;
       offsets[index].y.value = PADDING + CARDS_GAP + CARD_HEIGHT;
     }

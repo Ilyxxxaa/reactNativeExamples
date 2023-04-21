@@ -23,7 +23,6 @@ export const SortablePhotoCard: React.FC<IProps> = ({
   offsets,
   index,
   children,
-  drugItemsAmount,
 }) => {
   const offset = offsets[index];
   const translation = useVector();
@@ -53,24 +52,19 @@ export const SortablePhotoCard: React.FC<IProps> = ({
           between(translation.y.value, o.y.value, o.y.value + CARD_HEIGHT)
         ) {
           reorder(offsets, offset.order.value, i);
-          console.log('пересчет');
           calculateLayout(offsets);
-          console.log(
-            offsets.map(item => {
-              return item.photoTitle.value;
-            }),
-          );
-          break;
         }
       }
     },
     onEnd: () => {
+      console.log(
+        'end drop',
+        offsets.map(item => {
+          return {order: item.order.value, name: item.photoTitle.value};
+        }),
+      );
       translation.x.value = withSpring(offset.x.value);
       translation.y.value = withSpring(offset.y.value);
-      const serverRequest = offsets.map(item => {
-        return item.photoTitle.value;
-      });
-      console.log('drug end', serverRequest);
       isGestureActive.value = false;
     },
   });
@@ -113,3 +107,23 @@ export const SortablePhotoCard: React.FC<IProps> = ({
     </Animated.View>
   );
 };
+function byOrder(
+  a: SharedValues<{
+    order: number;
+    x: number;
+    y: number;
+    originalX: number;
+    originalY: number;
+    photoTitle: string;
+  }>,
+  b: SharedValues<{
+    order: number;
+    x: number;
+    y: number;
+    originalX: number;
+    originalY: number;
+    photoTitle: string;
+  }>,
+): number {
+  throw new Error('Function not implemented.');
+}

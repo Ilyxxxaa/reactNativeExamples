@@ -23,7 +23,7 @@ export const PhotoList: React.FC<IProps> = ({
   photos,
 }) => {
   const offsets = children.map((_, index) => ({
-    order: useSharedValue(index + 1),
+    order: useSharedValue(index),
     x: useSharedValue(0),
     y: useSharedValue(0),
     originalX: useSharedValue(0),
