@@ -15,9 +15,10 @@ export type Offset = SharedValues<{
   originalX: number;
   originalY: number;
   photoTitle: string;
+  initialIndex: number;
 }>;
 
-const byOrder = (a: Offset, b: Offset) => {
+export const byOrder = (a: Offset, b: Offset) => {
   'worklet';
   return a.order.value > b.order.value ? 1 : -1;
 };
@@ -32,7 +33,7 @@ export const move = <T>(input: T[], from: number, to: number) => {
 export const reorder = (input: Offset[], from: number, to: number) => {
   'worklet';
   console.log('меняю местами', from, 'и', to);
-  // const offsets = input.sort(byOrder);
+  input.sort(byOrder);
   const newOffset = move(input, from, to);
   newOffset.map((offset, index) => (offset.order.value = index));
   console.log('new offsets', input);
@@ -49,27 +50,27 @@ export const calculateLayout = (offsets: Offset[]) => {
   }
 
   offsets.forEach((offset, index) => {
-    if (offset.order.value === 0) {
+    if (index === 0) {
       offsets[index].x.value = PADDING;
       offsets[index].y.value = PADDING;
     }
-    if (offset.order.value === 1) {
+    if (index === 1) {
       offsets[index].x.value = PADDING + CARD_WIDTH + CARDS_GAP;
       offsets[index].y.value = PADDING;
     }
-    if (offset.order.value === 2) {
+    if (index === 2) {
       offsets[index].x.value = PADDING + CARD_WIDTH * 2 + CARDS_GAP * 2;
       offsets[index].y.value = PADDING;
     }
-    if (offset.order.value === 3) {
+    if (index === 3) {
       offsets[index].x.value = PADDING;
       offsets[index].y.value = PADDING + CARDS_GAP + CARD_HEIGHT;
     }
-    if (offset.order.value === 4) {
+    if (index === 4) {
       offsets[index].x.value = PADDING + CARD_WIDTH + CARDS_GAP;
       offsets[index].y.value = PADDING + CARDS_GAP + CARD_HEIGHT;
     }
-    if (offset.order.value === 5) {
+    if (index === 5) {
       offsets[index].x.value = PADDING + CARD_WIDTH * 2 + CARDS_GAP * 2;
       offsets[index].y.value = PADDING + CARDS_GAP + CARD_HEIGHT;
     }

@@ -2,7 +2,6 @@ import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import PhotoCard from './PhotoCard';
 import PhotoList from './PhotoList';
-import {move} from './utils';
 
 const photos = [
   {title: 'Первая', key: 1},

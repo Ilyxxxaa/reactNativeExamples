@@ -9,7 +9,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {GestureEvent, PanGestureHandler} from 'react-native-gesture-handler';
 import {between, useVector} from 'react-native-redash';
-import {Offset, calculateLayout, reorder} from './utils';
+import {Offset, byOrder, calculateLayout, reorder} from './utils';
 import {CARD_HEIGHT, CARD_WIDTH} from './sizes';
 
 interface IProps {
@@ -57,12 +57,18 @@ export const SortablePhotoCard: React.FC<IProps> = ({
       }
     },
     onEnd: () => {
+      console.log('end drop', offsets);
       console.log(
-        'end drop',
-        offsets.map(item => {
-          return {order: item.order.value, name: item.photoTitle.value};
+        ' sorted end drop',
+        offsets.sort(byOrder).map(item => {
+          return {
+            order: item.order.value,
+            name: item.photoTitle.value,
+            initialIndex: item.initialIndex.value,
+          };
         }),
       );
+
       translation.x.value = withSpring(offset.x.value);
       translation.y.value = withSpring(offset.y.value);
       isGestureActive.value = false;
@@ -107,23 +113,3 @@ export const SortablePhotoCard: React.FC<IProps> = ({
     </Animated.View>
   );
 };
-function byOrder(
-  a: SharedValues<{
-    order: number;
-    x: number;
-    y: number;
-    originalX: number;
-    originalY: number;
-    photoTitle: string;
-  }>,
-  b: SharedValues<{
-    order: number;
-    x: number;
-    y: number;
-    originalX: number;
-    originalY: number;
-    photoTitle: string;
-  }>,
-): number {
-  throw new Error('Function not implemented.');
-}
