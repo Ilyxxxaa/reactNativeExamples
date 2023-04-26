@@ -10,13 +10,14 @@ import React from 'react';
 // import {Slider} from './pages';
 // import {PhotoSection} from './pages;
 // import {PhotoSection} from './pages';
-import {PhotoSection2} from './pages';
+// import {PhotoSection2} from './pages';
+import {Chrome} from './pages';
 
 const App = () => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <PhotoSection2 />
+        <Chrome />
       </SafeAreaView>
     </SafeAreaProvider>
   );

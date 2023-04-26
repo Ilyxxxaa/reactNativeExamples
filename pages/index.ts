@@ -7,6 +7,7 @@ import {
   OpacityRect,
 } from './ReanimatedSimpleComponents';
 import PhotoSection2 from './DrugAndDrop2/PhotoSection2';
+import Chrome from './GoogleChrome/Chrome';
 
 export {
   Duolingo,
@@ -16,4 +17,5 @@ export {
   Slider,
   PhotoSection,
   PhotoSection2,
+  Chrome,
 };
