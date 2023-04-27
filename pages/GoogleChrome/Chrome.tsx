@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-import {MARGIN, SIZE} from './Config';
+import {MARGIN} from './Config';
 import Tile from './Tile';
 import SortableList from './SortableList';
 

@@ -1,9 +1,6 @@
 import React, {ReactNode} from 'react';
-import {Dimensions, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {
-  COL,
   Positions,
   SIZE,
   animationConfig,
