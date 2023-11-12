@@ -8,6 +8,7 @@ import {
 } from './ReanimatedSimpleComponents';
 import PhotoSection2 from './DrugAndDrop2/PhotoSection2';
 import Chrome from './GoogleChrome/Chrome';
+import ScrollingHeader from './ScrollingHeader';
 
 export {
   Duolingo,
@@ -18,4 +19,5 @@ export {
   PhotoSection,
   PhotoSection2,
   Chrome,
+  ScrollingHeader,
 };
