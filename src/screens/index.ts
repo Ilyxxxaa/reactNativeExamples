@@ -11,7 +11,7 @@ import Chrome from './GoogleChrome/Chrome';
 import ScrollingHeader from './ScrollingHeader';
 import WelcomeScreen from './WelcomeScreen';
 import UberEats from './UberEats';
-import BottomModal from './BottomModal';
+import BottomModalScreen from './BottomModal';
 
 export {
   Duolingo,
@@ -25,5 +25,5 @@ export {
   ScrollingHeader,
   WelcomeScreen,
   UberEats,
-  BottomModal,
+  BottomModalScreen,
 };

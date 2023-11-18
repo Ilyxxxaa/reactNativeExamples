@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import React from 'react';
 import {GeneralNavigator} from '@navigation';
-import {NavigationContainer} from '@react-navigation/native';
+
 // import {AnimatedBall} from './components';
 // import {Duolingo} from './pages';
 // import { UseTransition } from './pages';
@@ -26,9 +26,3 @@ const App = () => {
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

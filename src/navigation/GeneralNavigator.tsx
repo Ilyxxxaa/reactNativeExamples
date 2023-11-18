@@ -4,7 +4,7 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {BottomModal, WelcomeScreen} from '@screens';
+import {BottomModalScreen, WelcomeScreen} from '@screens';
 import {RootStackParamList} from '@types';
 import {UberEats} from '@screens';
 
@@ -20,7 +20,7 @@ const GeneralNavigator = () => {
       <Stack.Navigator screenOptions={ScreenWithoutHeaderConfig}>
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Stack.Screen name="UberEats" component={UberEats} />
-        <Stack.Screen name="BottomModal" component={BottomModal} />
+        <Stack.Screen name="BottomModal" component={BottomModalScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
