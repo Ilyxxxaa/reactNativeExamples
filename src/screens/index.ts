@@ -9,6 +9,9 @@ import {
 import PhotoSection2 from './DrugAndDrop2/PhotoSection2';
 import Chrome from './GoogleChrome/Chrome';
 import ScrollingHeader from './ScrollingHeader';
+import WelcomeScreen from './WelcomeScreen';
+import UberEats from './UberEats';
+import BottomModal from './BottomModal';
 
 export {
   Duolingo,
@@ -20,4 +23,7 @@ export {
   PhotoSection2,
   Chrome,
   ScrollingHeader,
+  WelcomeScreen,
+  UberEats,
+  BottomModal,
 };

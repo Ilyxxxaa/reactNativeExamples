@@ -1,7 +1,9 @@
 import 'react-native-gesture-handler';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import React from 'react';
+import {GeneralNavigator} from '@navigation';
+import {NavigationContainer} from '@react-navigation/native';
 // import {AnimatedBall} from './components';
 // import {Duolingo} from './pages';
 // import { UseTransition } from './pages';
@@ -13,14 +15,12 @@ import React from 'react';
 // import {PhotoSection2} from './pages';
 // import {Chrome} from './pages';
 // import {ScrollingHeader} from './pages';
-import UberEats from './pages/UberEats';
+// import UberEats from './pages/UberEats';
 
 const App = () => {
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <UberEats />
-      </SafeAreaView>
+      <GeneralNavigator />
     </SafeAreaProvider>
   );
 };
