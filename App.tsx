@@ -1,5 +1,4 @@
 import 'react-native-gesture-handler';
-import {StyleSheet} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import React from 'react';
 import {GeneralNavigator} from '@navigation';

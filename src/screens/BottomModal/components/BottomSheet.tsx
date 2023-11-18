@@ -76,6 +76,7 @@ const BottomSheet = React.forwardRef<BottomSheetRefProps, Props>(({}, ref) => {
     <GestureDetector gesture={gesture}>
       <Animated.View style={[styles.container, rStyle]}>
         <View style={styles.line} />
+        <View style={styles.inner} />
       </Animated.View>
     </GestureDetector>
   );
@@ -100,5 +101,10 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     marginVertical: 15,
     alignSelf: 'center',
+  },
+  inner: {
+    backgroundColor: 'red',
+    flex: 1,
+    margin: 10,
   },
 });
