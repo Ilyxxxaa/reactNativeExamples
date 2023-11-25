@@ -12,6 +12,7 @@ import ScrollingHeader from './ScrollingHeader';
 import WelcomeScreen from './WelcomeScreen';
 import UberEats from './UberEats';
 import BottomModalScreen from './BottomModal';
+import TranslucentStatusBar from './TranslucentStatusBar';
 
 export {
   Duolingo,
@@ -26,4 +27,5 @@ export {
   WelcomeScreen,
   UberEats,
   BottomModalScreen,
+  TranslucentStatusBar,
 };

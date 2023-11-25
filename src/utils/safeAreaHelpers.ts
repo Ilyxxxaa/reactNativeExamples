@@ -90,7 +90,7 @@ const _getIphoneStatusBarHeight = () => {
   return 20;
 };
 
-export function getStatusBarHeight(skipAndroid: boolean = true) {
+export function getStatusBarHeight(skipAndroid: boolean = false) {
   return Platform.select({
     ios: _getIphoneStatusBarHeight(),
     android: skipAndroid ? 0 : StatusBar.currentHeight,

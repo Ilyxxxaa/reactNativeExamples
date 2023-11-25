@@ -1,4 +1,10 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '@types';
@@ -6,8 +12,6 @@ import {getStatusBarHeight, responsiveHeight} from '@utils';
 
 const WelcomeScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-
-  console.log(getStatusBarHeight());
 
   return (
     <View style={styles.wrapper}>
@@ -18,6 +22,9 @@ const WelcomeScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('BottomModal')}>
           <Text>Bottom Modal</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Translucent')}>
+          <Text>Translucent status bar</Text>
         </TouchableOpacity>
       </View>
     </View>
