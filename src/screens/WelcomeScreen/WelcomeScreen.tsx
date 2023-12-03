@@ -1,10 +1,4 @@
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '@types';
@@ -25,6 +19,9 @@ const WelcomeScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Translucent')}>
           <Text>Translucent status bar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('TextInputProps')}>
+          <Text>TextInputProps</Text>
         </TouchableOpacity>
       </View>
     </View>

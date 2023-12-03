@@ -13,6 +13,7 @@ import WelcomeScreen from './WelcomeScreen';
 import UberEats from './UberEats';
 import BottomModalScreen from './BottomModal';
 import TranslucentStatusBar from './TranslucentStatusBar';
+import TextInputProps from './TextInputProps';
 
 export {
   Duolingo,
@@ -28,4 +29,5 @@ export {
   UberEats,
   BottomModalScreen,
   TranslucentStatusBar,
+  TextInputProps,
 };

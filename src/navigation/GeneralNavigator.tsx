@@ -4,7 +4,12 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {BottomModalScreen, TranslucentStatusBar, WelcomeScreen} from '@screens';
+import {
+  BottomModalScreen,
+  TextInputProps,
+  TranslucentStatusBar,
+  WelcomeScreen,
+} from '@screens';
 import {RootStackParamList} from '@types';
 import {UberEats} from '@screens';
 
@@ -22,6 +27,7 @@ const GeneralNavigator = () => {
         <Stack.Screen name="UberEats" component={UberEats} />
         <Stack.Screen name="BottomModal" component={BottomModalScreen} />
         <Stack.Screen name="Translucent" component={TranslucentStatusBar} />
+        <Stack.Screen name="TextInputProps" component={TextInputProps} />
       </Stack.Navigator>
     </NavigationContainer>
   );

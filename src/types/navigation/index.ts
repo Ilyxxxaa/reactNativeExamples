@@ -3,4 +3,5 @@ export type RootStackParamList = {
   UberEats: undefined;
   BottomModal: undefined;
   Translucent: undefined;
+  TextInputProps: undefined;
 };
