@@ -3,6 +3,7 @@ import React from 'react';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '@types';
 import {getStatusBarHeight, responsiveHeight} from '@utils';
+import {screensData} from '../screensData';
 
 const WelcomeScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -11,18 +12,15 @@ const WelcomeScreen = () => {
     <View style={styles.wrapper}>
       <Text style={styles.title}>Hello</Text>
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.navigate('UberEats')}>
-          <Text>Uber Eats</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('BottomModal')}>
-          <Text>Bottom Modal</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Translucent')}>
-          <Text>Translucent status bar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('TextInputProps')}>
-          <Text>TextInputProps</Text>
-        </TouchableOpacity>
+        {screensData.map(item => {
+          return (
+            <TouchableOpacity
+              onPress={() => navigation.navigate(item.name)}
+              key={item.name}>
+              <Text>{item.name}</Text>
+            </TouchableOpacity>
+          );
+        })}
       </View>
     </View>
   );

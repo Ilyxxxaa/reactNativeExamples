@@ -14,6 +14,8 @@ import UberEats from './UberEats';
 import BottomModalScreen from './BottomModal';
 import TranslucentStatusBar from './TranslucentStatusBar';
 import TextInputProps from './TextInputProps';
+import ScrollViewWithDynamicHeader from './ScrollViewWithDynamicHeader';
+import {screensData} from './screensData';
 
 export {
   Duolingo,
@@ -30,4 +32,6 @@ export {
   BottomModalScreen,
   TranslucentStatusBar,
   TextInputProps,
+  ScrollViewWithDynamicHeader,
+  screensData,
 };

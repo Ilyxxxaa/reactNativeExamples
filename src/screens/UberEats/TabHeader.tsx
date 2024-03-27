@@ -92,7 +92,7 @@ export default ({tabs, y, scrollViewRef}: TabHeaderProps) => {
     flex: 1,
   };
 
-  const maskElement = <Animated.View {...{style}} />;
+  const maskElement = <Animated.View style={style} />;
 
   return (
     <View style={styles.container}>

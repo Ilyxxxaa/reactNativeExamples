@@ -4,4 +4,5 @@ export type RootStackParamList = {
   BottomModal: undefined;
   Translucent: undefined;
   TextInputProps: undefined;
+  ScrollViewWithDynamicHeader: undefined;
 };
